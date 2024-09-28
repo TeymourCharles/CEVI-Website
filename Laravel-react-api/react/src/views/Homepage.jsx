@@ -28,7 +28,9 @@ import peza from '../assets/peza.png';
 
 import { RiMenu3Fill } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
-import { useState } from "react";
+import { useRef, useState } from "react";
+
+import emailjs from '@emailjs/browser';
 
 import Carousel from "../components/Corousel";
 
@@ -42,6 +44,25 @@ export default function Homepage() {
             slideThree,
             cargoPlane
     ];
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+        .sendForm('service_0rqffmm', 'template_anzemlm', form.current, {
+            publicKey: 'a3GHMDGCl1IaDd-RW',
+        })
+        .then(
+            () => {
+            console.log('SUCCESS!');
+            },
+            (error) => {
+            console.log('FAILED...', error.text);
+            },
+        );
+    };
 
     return (
         <div className="overflow-hidden">
@@ -213,7 +234,7 @@ export default function Homepage() {
                     <div className="h-fit">
 
                         <div className="lg:flex justify-center max-w-max mx-auto">
-                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-b-2 border-custom-colorOne relative w-96 pb-20 my-10 mx-5 rounded-xl lg:pt-0 pt-1">
+                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-b-2 border-custom-colorOne relative w-96 pb-20 my-10 mx-5 rounded-xl lg:pt-0 pt-1 hover:scale-105 duration-300">
                                 <img className="w-24 absolute bottom-0 py-2 ml-2" src={goldLogo} alt="gold logo" />
                                 <img className="w-32 absolute right-0 top-0" src={stripe} alt="stripe gold" />
 
@@ -237,7 +258,7 @@ export default function Homepage() {
 
 
                             </div>
-                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-t-2 border-custom-colorOne relative w-96 pb-20 my-10 mx-5 rounded-xl lg:pt-0 pt-1">
+                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-t-2 border-custom-colorOne relative w-96 pb-20 my-10 mx-5 rounded-xl lg:pt-0 pt-1 hover:scale-105 duration-300">
                                 <img className="w-24 absolute top-0 py-2 ml-2" src={goldLogo} alt="gold logo" />
                                 <img className="w-44 absolute bottom-0 right-0" src={stripeTwo} alt="stripe gold" />
 
@@ -255,7 +276,7 @@ export default function Homepage() {
 
                                 </ul>
                             </div>
-                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-b-2 border-custom-colorOne relative w-96 my-10 mx-5 rounded-xl lg:pb-0 pb-20 lg:pt-0 pt-4">
+                            <div className="bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-b-2 border-custom-colorOne relative w-96 my-10 mx-5 rounded-xl lg:pb-0 pb-20 lg:pt-0 pt-4 hover:scale-105 duration-300">
                                 <img className="w-24 absolute bottom-0 py-2 ml-2" src={goldLogo} alt="gold logo" />
                                 <img className="w-32 absolute right-0 top-0" src={stripe} alt="stripe gold" />
 
@@ -331,7 +352,7 @@ export default function Homepage() {
                         <h1 className="text-custom-colorOne font-bold text-2xl py-4">Industries Covered</h1>
                     </div>
                     <div className="lg:flex justify-center gap-7 mx-auto w-min">
-                        <div className="w-96 border-b-2 border-custom-colorOne bg-gradient-to-b from-custom-colorOne to-custom-brown text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6">
+                        <div className="w-96 border-b-2 border-custom-colorOne bg-gradient-to-b from-custom-colorOne to-custom-brown text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6 hover:scale-105 duration-300">
 
                             <ol className="list-decimal mx-14">
                                 <li>Agricultural Products</li>
@@ -342,7 +363,7 @@ export default function Homepage() {
                                 <li> Feed Additives & Fertilizers</li>
                             </ol>
                         </div>
-                        <div className="w-96 border-t-2 border-custom-colorOne bg-gradient-to-bl from-custom-brown to-custom-colorOne text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6">
+                        <div className="w-96 border-t-2 border-custom-colorOne bg-gradient-to-bl from-custom-brown to-custom-colorOne text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6 hover:scale-105 duration-300">
                             <ol className="mx-10 pb-6">
                                 <li>7. Food & Beverages</li>
                                 <li>8. Garments/Textiles/Fabrics</li>
@@ -352,7 +373,7 @@ export default function Homepage() {
                                 <li>12. Medical Devices & Laboratory Equipments</li>
                             </ol>
                         </div>
-                        <div className="w-96 border-b-2 border-custom-colorOne bg-gradient-to-b from-custom-colorOne to-custom-brown text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6">
+                        <div className="w-96 border-b-2 border-custom-colorOne bg-gradient-to-b from-custom-colorOne to-custom-brown text-black rounded-b-3xl lg:rounded-t-3xl rounded-t-sm lg:mx-2 mx-10 mb-10 py-3 pt-6 hover:scale-105 duration-300">
                             <ol className="mx-10">
                                 <li>13. Metal Products</li>
                                 <li>{"14. Pesticide/Disinfectant (Huhs & Urban Use) / Herbicide / Insecticides / Fungicide"}</li>
@@ -371,24 +392,32 @@ export default function Homepage() {
                     </div>
                     <div className="bg-gradient-to-r from-custom-colorOne via-custom-brown to-custom-colorOne h-2"></div>
                     <div className="flex justify-center bg-gradient-to-b from-custom-lightGray to-custom-darkGray">
-                        <div className="h-96 w-3/4 rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10">
-                            <div className="ml-10 mt-5">
+                        <div className="flex h-[430px] w-3/4 rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10">
+                            <div className="ml-10 mt-5 w-[500px]">
 
+                                <form ref={form} onSubmit={sendEmail}>
 
-                                <label htmlFor="name">Name</label>
-                                <br />
-                                <input className="h-10 text-white w-5/12 rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="text" name="name" id="name" placeholder="Enter full name"/>
-                                <br />
+                                    <label htmlFor="name">Full name</label>
+                                    <br />
+                                    <input className="h-10 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="text" name="name" id="name" placeholder="Enter full name" required/>
+                                    <br />
+                                    <label htmlFor="email">Email address</label>
+                                    <br />
+                                    <input className="h-10 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="email" name="email" id="email" placeholder="Enter your email" required/>
+                                    <br />
+                                    <label htmlFor="message">Message</label>
+                                    <br />
 
+                                    <textarea className="h-28 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" name="message" id="message" placeholder="Enter a message"></textarea>
+                                    <br />
+                                    <button type="submit" className="bg-custom-darkGreen px-5 py-1 w-[95%] border-custom-colorOne rounded-xl text-xl duration-300 hover:scale-105 cursor-pointer">
+                                        Submit
+                                    </button>
+                                </form>
 
-
-                                <label htmlFor="email">Email</label>
-                                <br />
-                                <input className="h-10 text-white w-5/12 rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="email" name="email" id="email" placeholder="Enter your email"/>
-                                <br />
-                                <label htmlFor="message">Message</label>
-                                <br />
-                                <textarea className="h-28 text-white w-5/12 rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" name="message" id="message" placeholder="Enter a message"></textarea>
+                            </div>
+                            <div>
+                                fsdfs
                             </div>
 
 

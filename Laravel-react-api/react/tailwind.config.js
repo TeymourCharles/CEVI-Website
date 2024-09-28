@@ -11,6 +11,7 @@ module.exports = {
             'custom-brown': '#936C2F',   // Custom color name: 'custom-green'
             'custom-lightGray': '#474747',     // Custom color name: 'custom-red'
             'custom-darkGray': '#010101',
+            'custom-darkGreen': '#024b30',
         },
         listStyleType: {
             circle: 'circle',

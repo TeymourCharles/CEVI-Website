@@ -36,7 +36,7 @@ export default function Carousel ({ children:
                         <p className="absolute bottom-32 left-20 text-custom-colorOne">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim quidem neque labore voluptatibus voluptatem culpa quam est, veniam provident,
                         </p>
-                        <a href="#contact"><button className="absolute bottom-20 left-20 border-2 px-5 py-2 rounded-3xl text-white border-white">
+                        <a href="#contact"><button className="absolute bottom-20 left-20 border-2 px-5 py-2 rounded-3xl text-white border-white hover:scale-105 duration-300">
                             Contact Us
                         </button></a>
                     </div>
