@@ -6,7 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-bl to-custom-brown from-custom-colorOne h-44">
+        <footer className="bg-gradient-to-bl to-custom-brown from-custom-colorOne lg:h-44 h-24">
             <div className="md:flex md:justify-center md-items-center sm:px-12 px-4 py-7 h-full">
 
 
@@ -21,7 +21,7 @@ export default function Footer() {
                         </div>
 
                         <div>
-                            <ul className="flex gap-9 font-bold">
+                            <ul className="lg:flex gap-9 font-bold text-[17px] hidden">
                                 <li><a href="#aboutus">About us</a></li>
                                 <li><a href="#mission-vision">Mission & Vision</a></li>
                                 <li><a href="#services">Services</a></li>
@@ -35,7 +35,7 @@ export default function Footer() {
             <div className="flex justify-center items-center h-16 bg-custom-darkGray text-white">
 
                 <p className="opacity-65">
-                    yourgmail@gmail.com
+                    cevi.customsbrokerage@gmail.com
                 </p>
 
             </div>

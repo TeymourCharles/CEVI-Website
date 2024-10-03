@@ -1,4 +1,8 @@
-import { Link } from "react-router-dom";
+
+import { Link } from "react-scroll";
+import { useRef, useState } from "react";
+import axiosClient from "../axios-client";
+import Swal from 'sweetalert2'
 
 import slideOne from '../assets/slide01.jpg';
 import slideTwo from '../assets/slide02.jpg';
@@ -28,7 +32,7 @@ import peza from '../assets/peza.png';
 
 import { RiMenu3Fill } from "react-icons/ri";
 import { TfiClose } from "react-icons/tfi";
-import { useRef, useState } from "react";
+import { LuArrowUpToLine } from "react-icons/lu";
 
 import emailjs from '@emailjs/browser';
 
@@ -45,28 +49,57 @@ export default function Homepage() {
             cargoPlane
     ];
 
-    const form = useRef();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [responseMessage, setResponseMessage] = useState('');
+    const [arrowUp, setArrowUp] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const sendEmail = (e) => {
+    const handleSetActive = (to) => {
+        console.log(to);
+        if (to === "aboutus" || to === "mission-vision" || to === "services" || to === "affiliated" || to === "industries" || to === "contact") {
+            setArrowUp(true);
+        }
+
+        if (to === "header") {
+            setArrowUp(false);
+        }
+
+
+      };
+
+    const sendEmail = async (e) => {
         e.preventDefault();
+        try {
+            setLoading(true);
+            setResponseMessage('');
+            const response = await axiosClient.post('/contact', {
+                name,
+                email,
+                message,
+            });
 
-        emailjs
-        .sendForm('service_0rqffmm', 'template_anzemlm', form.current, {
-            publicKey: 'a3GHMDGCl1IaDd-RW',
-        })
-        .then(
-            () => {
-            console.log('SUCCESS!');
-            },
-            (error) => {
-            console.log('FAILED...', error.text);
-            },
-        );
+            setLoading(false);
+            Swal.fire({
+                title: "Your message is Successfully submitted",
+                text: "We will get back to you shortly, Thankyou!",
+                icon: "success"
+              });
+
+            setName('');
+            setEmail('');
+            setMessage('');
+        } catch (error) {
+            console.error('Error:', error.response ? error.response.data : error.message);
+            setLoading(false);
+            setResponseMessage('Failed to send message. Please try again.');
+        }
     };
 
     return (
         <div className="overflow-hidden">
-            <header className="bg-white shadow-md flex justify-center">
+            <header id="header"  className="bg-white shadow-md flex justify-center">
                 <nav className="flex justify-between items-center w-[92%]">
                     <div className="">
                         <div className="flex justify-center w-full py-2 px-3">
@@ -76,28 +109,64 @@ export default function Homepage() {
                     <div className={`lg:static lg:min-h-fit absolute bg-white min-h-[40vh] left-0 ${open ? "top-[11%]" : "top-[-100%]"} lg:w-auto w-full flex items-center px-5 py-5 lg:shadow-none shadow-sm duration-500`}>
                         <ul className="flex lg:flex-row flex-col lg:items-center lg:gap-[3vw] text-sm gap-8">
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#aboutus">About</a>
+                                <Link
+                                    to="aboutus"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">About</Link>
                             </li>
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#mission-vision">Mission & Vision</a>
+                                <Link
+                                    to="mission-vision"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">Mission & Vision</Link>
                             </li>
 
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#services">Services</a>
+                                <Link
+                                    to="services"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">Services</Link>
                             </li>
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#affiliated">Affiliated Govt</a>
+                                <Link
+                                    to="affiliated"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">Affiliated Govt</Link>
                             </li>
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#industries">Industries Covered</a>
+                                <Link
+                                    to="industries"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">Industries Covered</Link>
                             </li>
                             <li className="transform transition-transform duration-300 hover:scale-110">
-                                <a className="duration-500 text-custom-brown" href="#contact">Contact</a>
+                                <Link
+                                    to="contact"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={10}
+                                    duration={500}
+                                    onSetActive={handleSetActive} className="duration-500 text-custom-brown">Contact</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="flex items-center gap-6">
-                        <Link className="transition duration-700 ease-in-out bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-2 px-5 py-1 text-custom-colorOne rounded-full hover:bg-white hover:text-white hover:border-custom-darkGray" to="/login">Login</Link>
+                        <a className="transition duration-700 ease-in-out bg-gradient-to-b from-custom-lightGray to-custom-darkGray border-2 px-5 py-1 text-custom-colorOne rounded-full hover:bg-white hover:text-white hover:border-custom-darkGray" href="/login">Login</a>
                         {!open ? <RiMenu3Fill className="text-3xl cursor-pointer lg:hidden" onClick={() => setOpen(!open)} />
                         : <TfiClose className="text-3xl cursor-pointer lg:hidden" onClick={() => setOpen(!open)}/>
                         }
@@ -108,6 +177,20 @@ export default function Homepage() {
                 </nav>
 
             </header>
+            {arrowUp &&
+                <Link
+                    to="header"
+                    spy={true}
+                    smooth={true}
+                    offset={10}
+                    duration={500}
+                    onSetActive={handleSetActive}>
+                        <div className="bg-custom-darkGray fixed bottom-8 lg:right-10 right-2 rounded-full lg:py-0 lg:px-0 py-2 px-2">
+                            <LuArrowUpToLine size={23} className="text-white lg:my-3 lg:mx-3 my-1 mx-1"/>
+                        </div>
+                </Link>
+            }
+
                 {!open &&
                 <div>
 
@@ -392,32 +475,56 @@ export default function Homepage() {
                     </div>
                     <div className="bg-gradient-to-r from-custom-colorOne via-custom-brown to-custom-colorOne h-2"></div>
                     <div className="flex justify-center bg-gradient-to-b from-custom-lightGray to-custom-darkGray">
-                        <div className="flex h-[430px] w-3/4 rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10">
-                            <div className="ml-10 mt-5 w-[500px]">
+                        <div className="flex justify-center h-[500px] lg:w-[1000px] w-[500px] rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10">
+                            <div className="mt-16 w-[80%]">
 
-                                <form ref={form} onSubmit={sendEmail}>
+                                <form onSubmit={sendEmail}>
 
                                     <label htmlFor="name">Full name</label>
                                     <br />
-                                    <input className="h-10 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="text" name="name" id="name" placeholder="Enter full name" required/>
+                                    <input className="h-10 text-white w-[100%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10"
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        placeholder="Enter full name"
+                                        required
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}/>
                                     <br />
                                     <label htmlFor="email">Email address</label>
                                     <br />
-                                    <input className="h-10 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" type="email" name="email" id="email" placeholder="Enter your email" required/>
+                                    <input className="h-10 text-white w-[100%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10"
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Enter your email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}/>
                                     <br />
                                     <label htmlFor="message">Message</label>
                                     <br />
 
-                                    <textarea className="h-28 text-white w-[95%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10" name="message" id="message" placeholder="Enter a message"></textarea>
+                                    <textarea className="h-28 text-white w-[100%] rounded-md mb-4 mt-1 border-2 px-4 border-custom-colorOne bg-custom-darkGray bg-opacity-10"
+                                    name="message"
+                                    id="message"
+                                    placeholder="Enter a message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}></textarea>
                                     <br />
-                                    <button type="submit" className="bg-custom-darkGreen px-5 py-1 w-[95%] border-custom-colorOne rounded-xl text-xl duration-300 hover:scale-105 cursor-pointer">
+                                    <span className="text-red-600">{responseMessage}</span>
+                                    {!loading ?
+                                        <button type="submit" className="bg-custom-darkGreen px-5 py-1 w-[100%] border-custom-colorOne rounded-xl text-xl duration-300 hover:scale-105 cursor-pointer">
                                         Submit
-                                    </button>
+                                        </button>
+                                    :
+                                        <button type="submit" className="bg-custom-darkGreen px-5 py-1 w-[100%] border-custom-colorOne rounded-xl text-xl duration-300 hover:scale-105 cursor-pointer">
+                                        Loading...
+                                        </button>
+                                    }
+
                                 </form>
 
-                            </div>
-                            <div>
-                                fsdfs
                             </div>
 
 

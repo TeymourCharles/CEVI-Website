@@ -15,6 +15,7 @@ export default function Guestlayout() {
 
         <div className="">
             <div className="flex justify-center h-full">
+
                 <Outlet/>
             </div>
             <Footer/>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { Link } from "react-scroll";
 
 import businessName from '../assets/cevi-name.png';
 
@@ -9,6 +10,17 @@ export default function Carousel ({ children:
     autoSlide,
     autoSlideInterval=3000  }) {
     const [current, setCurrent] = useState(0);
+
+    const handleSetActive = (to) => {
+        console.log(to);
+        if (to === "contact") {
+            setArrowUp(true);
+        }
+
+        if (to === "header") {
+            setArrowUp(false);
+        }
+      };
 
     const prev = () =>
         setCurrent((current) => (current == 0 ? imageData.length - 1 : current - 1));
@@ -32,20 +44,26 @@ export default function Carousel ({ children:
             <div className="flex justify-center">
                 <div className="bg-custom-lightGray bg-opacity-30 h-[96%] w-[99%] absolute top-2 rounded-2xl">
                     <div className="relative h-[100%] w-[100%]">
-                        <img src={businessName} alt="" className="absolute bottom-40 left-20 w-96"/>
-                        <p className="absolute bottom-32 left-20 text-custom-colorOne">
+                        <img src={businessName} alt="" className="absolute lg:bottom-40 bottom-28 lg:left-20 left-5 lg:w-96 w-48"/>
+                        <p className="absolute lg:bottom-32 bottom-20 lg:left-20 left-5 lg:text-[15px] text-[9px] text-custom-colorOne">
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim quidem neque labore voluptatibus voluptatem culpa quam est, veniam provident,
                         </p>
-                        <a href="#contact"><button className="absolute bottom-20 left-20 border-2 px-5 py-2 rounded-3xl text-white border-white hover:scale-105 duration-300">
+                        <Link
+                            to="contact"
+                            spy={true}
+                            smooth={true}
+                            offset={10}
+                            duration={500}
+                            onSetActive={handleSetActive}><button className="absolute lg:bottom-20 bottom-7 lg:left-20 left-5 border-2 px-5 py-2 rounded-3xl text-white lg:text-[15px] text-[10px] border-white hover:scale-105 duration-300">
                             Contact Us
-                        </button></a>
+                        </button></Link>
                     </div>
 
                 </div>
 
 
             </div>
-            <div className="absolute bottom-4 right-0 left-0">
+            <div className="absolute lg:block hidden bottom-4 right-0 left-0">
                 <div className="flex items-center justify-center gap-2">
                     {imageData.map((_, index) => (
                         <div className={`transition-all w-3 h-3 bg-custom-lightGray rounded-full
