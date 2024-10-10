@@ -25,6 +25,7 @@ export default function Users() {
             });
     }, []);
 
+    //approve user
     const handleClickApprove = (id) => {
         Swal.fire({
             title: "Are you sure you want to approve this request?",
@@ -126,12 +127,12 @@ export default function Users() {
         <div className={`${user.user_type === "admin" ? "block" : "hidden"}`}>
             {userList.length === 0 && <div className="text-center fixed top-[51%] left-[47%]">No current user request</div>}
                 {loading && <ClipLoader className="absolute left-[50%] top-[45%]"
-                            color={'#010101'}
-                            loading={loading}
-                            size={50}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                        />}
+                    color={'#010101'}
+                    loading={loading}
+                    size={50}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />}
             <table className="table-fixed w-[80%] mx-auto mt-10 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr className="text-center">

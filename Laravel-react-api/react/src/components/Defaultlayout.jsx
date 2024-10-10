@@ -54,7 +54,7 @@ export default function Defaultlayout() {
 
           } catch (error) {
             console.error('Logout failed:', error);
-            // Handle error if needed, e.g., show a notification
+
           }
     }
 

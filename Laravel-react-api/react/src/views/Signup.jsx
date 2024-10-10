@@ -99,12 +99,12 @@ export default function Signup() {
             </header>
             <div className={`md:w-[93%] w-[95%] p-6 shadow-lg bg-white rounded-md mt-[4%] mb-10 relative ${loading && "opacity-50"}`}>
                     {loading && <ClipLoader className="absolute left-[45%] top-[47%]"
-                            color={'#010101'}
-                            loading={loading}
-                            size={50}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                        />}
+                        color={'#010101'}
+                        loading={loading}
+                        size={50}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />}
                 <div className="inline-flex w-full justify-center mb-2">
                     <FaUser className="text-3xl m-2"/>
                     <h1 className="text-3xl block font-semibold">Sign up</h1>
