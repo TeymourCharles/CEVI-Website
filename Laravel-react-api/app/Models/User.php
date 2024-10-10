@@ -21,7 +21,10 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'proof_id',
         'password',
+        'user_type',
+        'status'
     ];
 
     /**
@@ -45,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function setFirstnameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+    public function setLastnameAttribute($value)
+    {
+        $this->attributes['last_name'] = ucfirst($value);
     }
 }

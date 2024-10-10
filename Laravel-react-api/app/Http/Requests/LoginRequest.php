@@ -22,7 +22,20 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
+            'email' => [
+            'required',
+            'email',
+            'exists:users,email',
+            function ($attribute, $value, $fail) {
+                $user = \App\Models\User::where('email', $value)->first();
+
+                if ($user && $user->status === 'pending') {
+                    $fail("Your signup request is sent to Admin, please wait for Admin's approval");
+                } else if ($user && $user->status === 'rejected') {
+                    $fail("Your signup request has been rejected.");
+                }
+            }
+        ],
             'password' => 'required'
         ];
     }

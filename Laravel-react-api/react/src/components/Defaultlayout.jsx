@@ -8,6 +8,7 @@ import { FiUsers } from "react-icons/fi";
 import { FaEarlybirds } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import axiosClient from "../axios-client";
+import Swal from 'sweetalert2';
 
 import ceviLogo from "../assets/cevi-logo.png"
 import logo from '../assets/only-logo.png';
@@ -15,7 +16,7 @@ import name from '../assets/cevi-name.png';
 
 export default function Defaultlayout() {
     const [open, setOpen] = useState(true);
-
+    const [userList, setUserList] = useState([]);
     const {user, token, setUser, setToken} = useStateContext();
 
 
@@ -26,6 +27,17 @@ export default function Defaultlayout() {
         })
     }, [])
 
+    useEffect(() => {
+        axiosClient.get('http://127.0.0.1:8000/api/user-list')
+            .then(response => {
+                setUserList(response.data.user);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setError('Error fetching data');
+            });
+    }, []);
+
     if (!token) {
         return <Navigate to="/homepage"/>
     }
@@ -34,9 +46,22 @@ export default function Defaultlayout() {
         ev.preventDefault();
 
         try {
-            await axiosClient.post('/logout');
-            setUser({});
-            setToken(null);
+            Swal.fire({
+                title: "Are you sure you want to log out this account?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    axiosClient.post('/logout');
+                    setUser({});
+                    setToken(null);
+                }
+              });
+
+
           } catch (error) {
             console.error('Logout failed:', error);
             // Handle error if needed, e.g., show a notification
@@ -57,10 +82,12 @@ export default function Defaultlayout() {
                     </div>
 
 
-                    <div className="inline-flex p-1 pt-2 pb-2 hover:bg-gray-600 rounded-md m-1">
+                    <div className={`${user.user_type === "admin" ? "block" : "hidden"} inline-flex p-1 pt-2 pb-2 hover:bg-gray-600 rounded-md m-1`}>
                         <FiUsers className={`${open && "rotate-[360deg]"} text-4xl fixed block float-left ml-5 text-custom-colorOne duration-500`}/>
                         <Link className={`${!open && "scale-0"} duration-300 origin-left font-medium text-custom-colorOne text-2xl ml-20`} to="/users">Users</Link>
                     </div>
+
+
 
             </aside>
 

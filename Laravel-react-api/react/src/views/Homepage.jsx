@@ -2,7 +2,8 @@
 import { Link } from "react-scroll";
 import { useRef, useState } from "react";
 import axiosClient from "../axios-client";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import ClipLoader from "react-spinners/ClipLoader";
 
 import slideOne from '../assets/slide01.jpg';
 import slideTwo from '../assets/slide02.jpg';
@@ -69,8 +70,8 @@ export default function Homepage() {
 
       };
 
-    const sendEmail = async (e) => {
-        e.preventDefault();
+    const sendEmail = async (ev) => {
+        ev.preventDefault();
         try {
             setLoading(true);
             setResponseMessage('');
@@ -82,9 +83,13 @@ export default function Homepage() {
 
             setLoading(false);
             Swal.fire({
-                title: "Your message is Successfully submitted",
-                text: "We will get back to you shortly, Thankyou!",
-                icon: "success"
+                title: "Submitted Successfully",
+                text: "Thank you for contacting us!",
+                icon: "success",
+                confirmButtonText: "OK",
+                customClass: {
+                    confirmButton: 'bg-custom-darkGreen hover:bg-green-700 text-white font-bold py-2 px-4 w-20 rounded-1xl'
+                }
               });
 
             setName('');
@@ -475,7 +480,15 @@ export default function Homepage() {
                     </div>
                     <div className="bg-gradient-to-r from-custom-colorOne via-custom-brown to-custom-colorOne h-2"></div>
                     <div className="flex justify-center bg-gradient-to-b from-custom-lightGray to-custom-darkGray">
-                        <div className="flex justify-center h-[500px] lg:w-[1000px] w-[500px] rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10">
+
+                        <div className={`flex justify-center h-[500px] lg:w-[1000px] w-[500px] rounded-3xl border-b-2 border-custom-colorOne text-custom-colorOne bg-gradient-to-b from-custom-lightGray to-custom-darkGray my-10 relative ${loading && "opacity-50"}`}>
+                            {loading && <ClipLoader className="absolute left-[48%] top-[41%]"
+                                    color={'#FFD870'}
+                                    loading={loading}
+                                    size={50}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                />}
                             <div className="mt-16 w-[80%]">
 
                                 <form onSubmit={sendEmail}>
@@ -518,7 +531,7 @@ export default function Homepage() {
                                         Submit
                                         </button>
                                     :
-                                        <button type="submit" className="bg-custom-darkGreen px-5 py-1 w-[100%] border-custom-colorOne rounded-xl text-xl duration-300 hover:scale-105 cursor-pointer">
+                                        <button type="submit" className="bg-custom-lightGray px-5 py-1 w-[100%] border-custom-colorOne rounded-xl text-xl duration-300 cursor-pointer" disabled>
                                         Loading...
                                         </button>
                                     }
