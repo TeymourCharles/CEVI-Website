@@ -105,7 +105,6 @@ export default function Login() {
 
 
             <div className={`md:w-[93%] w-[95%] p-6 shadow-lg bg-white rounded-md mt-[4%] mb-20 relative ${loading && "opacity-50"}`}>
-            {checkStatus && <div className="absolute left-[42%] top-[30%]">Checking user status</div>}
                 {loading && <ClipLoader className="absolute left-[45%] top-[43%]"
                             color={'#010101'}
                             loading={loading}

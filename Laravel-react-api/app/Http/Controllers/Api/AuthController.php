@@ -42,7 +42,7 @@ class AuthController extends Controller
                 'proof_id' => $path.$new_name,
                 'password' => $data['password'],
                 'user_type' => "admin",
-                'status' => "approved"
+                'status' => "approved_admin"
 
 
             ]);

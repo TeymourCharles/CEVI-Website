@@ -16,7 +16,6 @@ import name from '../assets/cevi-name.png';
 
 export default function Defaultlayout() {
     const [open, setOpen] = useState(true);
-    const [userList, setUserList] = useState([]);
     const {user, token, setUser, setToken} = useStateContext();
 
 
@@ -27,16 +26,7 @@ export default function Defaultlayout() {
         })
     }, [])
 
-    useEffect(() => {
-        axiosClient.get('http://127.0.0.1:8000/api/user-list')
-            .then(response => {
-                setUserList(response.data.user);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                setError('Error fetching data');
-            });
-    }, []);
+
 
     if (!token) {
         return <Navigate to="/homepage"/>
@@ -72,19 +62,19 @@ export default function Defaultlayout() {
 
     return (
         <div className="">
-            <aside className={`${open ? "w-72" : "w-20"} duration-300 bg-gradient-to-r from-custom-lightGray to-custom-darkGray text-white fixed left-0 top-0 h-full flex flex-col py-8 space-y-4`}>
+            <aside className={`${!open ? "w-72" : "w-20"} duration-300 bg-gradient-to-r from-custom-lightGray to-custom-darkGray text-white fixed left-0 top-0 h-full flex flex-col py-8 space-y-4`}>
 
-                    <BsArrowLeft className={`${!open && "rotate-180"} duration-300 bg-gradient-to-r from-custom-colorOne to-custom-brown text-black text-3xl rounded-full absolute -right-3 border border-custom-brown cursor-pointer`}
+                    <BsArrowLeft className={`${open && "rotate-180"} duration-300 bg-gradient-to-r from-custom-colorOne to-custom-brown text-black text-3xl rounded-full absolute -right-3 border border-custom-brown cursor-pointer`}
                     onClick={() => setOpen(!open)}/>
                     <div className="inline-flex p-1 pt-2 pb-2 hover:bg-gray-600 rounded-md m-1">
-                        <MdDashboardCustomize className={`${open && "rotate-[360deg]"} text-4xl fixed block float-left ml-5 text-custom-colorOne duration-500`}/>
-                        <Link className={`${!open && "scale-0"} duration-300 origin-left font-medium text-custom-colorOne text-2xl ml-20`} to="/dashboard">Dashboard</Link>
+                        <MdDashboardCustomize className={`${!open && "rotate-[360deg]"} text-4xl fixed block float-left ml-5 text-custom-colorOne duration-500`}/>
+                        <Link className={`${open && "scale-0"} duration-300 origin-left font-medium text-custom-colorOne text-2xl ml-20`} to="/dashboard">Dashboard</Link>
                     </div>
 
 
                     <div className={`${user.user_type === "admin" ? "block" : "hidden"} inline-flex p-1 pt-2 pb-2 hover:bg-gray-600 rounded-md m-1`}>
-                        <FiUsers className={`${open && "rotate-[360deg]"} text-4xl fixed block float-left ml-5 text-custom-colorOne duration-500`}/>
-                        <Link className={`${!open && "scale-0"} duration-300 origin-left font-medium text-custom-colorOne text-2xl ml-20`} to="/users">Users</Link>
+                        <FiUsers className={`${!open && "rotate-[360deg]"} text-4xl fixed block float-left ml-5 text-custom-colorOne duration-500`}/>
+                        <Link className={`${open && "scale-0"} duration-300 origin-left font-medium text-custom-colorOne text-2xl ml-20`} to="/users">Users</Link>
                     </div>
 
 

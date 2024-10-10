@@ -31,7 +31,7 @@ class LoginRequest extends FormRequest
 
                 if ($user && $user->status === 'pending') {
                     $fail("Your signup request is sent to Admin, please wait for Admin's approval");
-                } else if ($user && $user->status === 'rejected') {
+                } else if ($user && $user->status === 'archive') {
                     $fail("Your signup request has been rejected.");
                 }
             }
