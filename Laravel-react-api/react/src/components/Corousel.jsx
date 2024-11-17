@@ -44,17 +44,15 @@ export default function Carousel ({ children:
             <div className="flex justify-center">
                 <div className="bg-custom-lightGray bg-opacity-30 h-[96%] w-[99%] absolute top-2 rounded-2xl">
                     <div className="relative h-[100%] w-[100%]">
-                        <img src={businessName} alt="" className="absolute lg:bottom-40 bottom-28 lg:left-20 left-5 lg:w-96 w-48"/>
-                        <p className="absolute lg:bottom-32 bottom-20 lg:left-20 left-5 lg:text-[15px] text-[9px] text-custom-colorOne">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim quidem neque labore voluptatibus voluptatem culpa quam est, veniam provident,
-                        </p>
+                        <img src={businessName} alt="" className="absolute lg:bottom-40 bottom-20 lg:left-20 left-5 lg:w-96 w-48"/>
+
                         <Link
                             to="contact"
                             spy={true}
                             smooth={true}
                             offset={10}
                             duration={500}
-                            onSetActive={handleSetActive}><button className="absolute lg:bottom-20 bottom-7 lg:left-20 left-5 border-2 px-5 py-2 rounded-3xl text-white lg:text-[15px] text-[10px] border-white hover:scale-105 duration-300">
+                            onSetActive={handleSetActive}><button className="absolute lg:bottom-24 bottom-7 lg:left-20 left-5 border-2 px-5 py-2 rounded-3xl text-white lg:text-[15px] text-[10px] border-white hover:scale-105 duration-300">
                             Contact Us
                         </button></Link>
                     </div>

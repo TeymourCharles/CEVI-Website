@@ -10,6 +10,13 @@ import slideTwo from '../assets/slide02.jpg';
 import slideThree from '../assets/slide03.jpg';
 import cargoPlane from '../assets/plane-cargo.jpg';
 
+
+import imgTwo from '../assets/img-2.jpg';
+import imgThree from '../assets/img-3.jpg';
+import imgFour from '../assets/img-4.jpg';
+import imgFive from '../assets/img-5.jpg';
+import imgSix from '../assets/img-6.jpeg';
+
 import onlyLogo from '../assets/only-logo.png';
 import goldLogo from '../assets/logo-gold.png';
 import skylineBg from '../assets/skyline-bg.jpg';
@@ -44,10 +51,11 @@ export default function Homepage() {
     const [open, setOpen] = useState(false);
 
     const imageData = [
-            slideOne,
-            slideTwo,
-            slideThree,
-            cargoPlane
+            imgFour,
+            imgTwo,
+            imgThree,
+            imgFive,
+            imgSix
     ];
 
     const [name, setName] = useState('');

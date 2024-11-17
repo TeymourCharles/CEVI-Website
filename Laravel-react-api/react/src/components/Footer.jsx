@@ -13,10 +13,16 @@ export default function Footer() {
                     <div className="">
                         <div className="flex gap-4 justify-center pb-6">
                             <div className="bg-black h-min py-2 px-2 rounded-full">
-                                <FaLinkedinIn size={25} className="text-custom-colorOne cursor-pointer"/>
+                                <a href="https://www.linkedin.com/company/cevi-customsbrokerage/" target="_blank">
+                                    <FaLinkedinIn size={25} className="text-custom-colorOne cursor-pointer"/>
+                                </a>
+
                             </div>
                             <div>
-                                <FaFacebook size={40} className="cursor-pointer"/>
+                                <a href="https://www.facebook.com/profile.php?id=100090084226695&mibextid=ZbWKwL" target="_blank">
+                                    <FaFacebook size={40} className="cursor-pointer"/>
+                                </a>
+
                             </div>
                         </div>
 
